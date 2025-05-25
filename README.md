@@ -2,8 +2,7 @@
 ## 🎓 시각디자인학과 학우분의 졸업 작품 웹사이트
 
 ![Personal Brain Test](/public/favicon.svg)
-
-#### 🔗 [https://personalbraintest.netlify.app/](https://personalbraintest.netlify.app/)
+#### 🔗 [사이트 주소](https://yourbrain.site/)
 
 **BrainTest**는 사용자에게 다양한 테스트와 결과를 제공하는 웹 애플리케이션입니다. React와 React Router를 사용하여 개발되었으며, 사용자 경험과 반응형 인터페이스를 중점적으로 설계했습니다.
 
