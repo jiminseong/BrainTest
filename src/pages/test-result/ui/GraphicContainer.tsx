@@ -3,7 +3,6 @@ import BottomLogo from '../../../assets/icons/blackLogo.svg?react';
 import AnimationRow from './AnimationList';
 import MobileBr from '../../../component/box/MobileBr';
 const GraphicContainer = ({ type }: { type: number }) => {
-    console.log(type);
     return (
         <GraphicContainerWrapper>
             <Wrapper>
