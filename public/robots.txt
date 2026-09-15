@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /save/
+Disallow: /print/

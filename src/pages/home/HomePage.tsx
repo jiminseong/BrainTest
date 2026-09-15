@@ -11,7 +11,6 @@ import cursorIcon from '/cursorIcon2.svg';
 import { isMobile } from '../test-content/TestContentPage';
 
 const HomePage = () => {
-    localStorage.setItem('currentPossibility', `${import.meta.env.VITE_DRAW_PROBABILITY * 100}% `);
     const navigate = useNavigate();
     const [buttonDisplay, setButtonDisplay] = useState(false);
     const [animationStopState, setAnimationStop] = useState(false);
@@ -65,6 +64,14 @@ const HomePage = () => {
         }, 50); // 50ms 지연 시간
 
         return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 클리어
+    }, []);
+
+    // 당첨 확률은 렌더 중이 아니라 마운트 시점에 한 번만 기록한다 (미설정 시 NaN% 저장 방지)
+    useEffect(() => {
+        const probability = Number(import.meta.env.VITE_DRAW_PROBABILITY);
+        if (Number.isFinite(probability)) {
+            localStorage.setItem('currentPossibility', `${probability * 100}% `);
+        }
     }, []);
 
     const handleMouseEnter = () => setAnimationStop(true);

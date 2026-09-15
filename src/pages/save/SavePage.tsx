@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { isValidResultType } from '../../model/resultType';
 import styled from 'styled-components';
 import { Button } from '../../component/button/Button';
 import html2canvas from 'html2canvas';
@@ -39,6 +40,11 @@ const SavePage = () => {
 
         loadImage();
     }, [resultType]);
+
+    // 없는 유형으로 직접 접근하면 이미지 로드가 실패하므로 홈으로 돌려보낸다
+    if (!isValidResultType(resultType)) {
+        return <Navigate to="/" replace />;
+    }
 
     return (
         <>

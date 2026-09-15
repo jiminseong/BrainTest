@@ -37,7 +37,7 @@ const TestContentPage = () => {
 
     const TOTAL_COUNT = 20;
     const DAILY_LIMIT = 4;
-    const DRAW_PROBABILITY = Number(import.meta.env.VITE_DRAW_PROBABILITY);
+    const DRAW_PROBABILITY = Number(import.meta.env.VITE_DRAW_PROBABILITY) || 0; // 미설정 시 NaN 대신 0 (추첨 비활성)
 
     const getStoredValue = (key: string, defaultValue: number): number => {
         const savedValue = localStorage.getItem(key);
@@ -244,7 +244,7 @@ const TestContentPage = () => {
             setLoading(false);
             handlePrint();
 
-            navigate(`/test/result/${resultType}/${name}`, { replace: true });
+            navigate(`/test/result/${resultType}/${encodeURIComponent(name)}`, { replace: true });
             setTimeout(() => {
                 window.scrollTo({
                     top: window.innerHeight * 0.86,
@@ -264,7 +264,7 @@ const TestContentPage = () => {
             downloadImage(resultType);
             // navigate 후에 setTimeout을 사용하여 스크롤 동작을 지연시킵니다.
 
-            navigate(`/test/result/${resultType}/${name}`, { replace: true });
+            navigate(`/test/result/${resultType}/${encodeURIComponent(name)}`, { replace: true });
             setTimeout(() => {
                 window.scrollTo({
                     top: window.innerHeight * 0.5,

@@ -8,7 +8,8 @@ import TypeStructure from './ui/TypeStructure';
 import TypeContentText from './ui/TypeContentText';
 import GraphicContainer from './ui/GraphicContainer';
 import MiddleNavigationBar from './ui/MiddleNavigationBar';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
+import { isValidResultType } from '../../model/resultType';
 import { isMobile } from '../test-content/TestContentPage';
 
 const TestResultPage = () => {
@@ -70,6 +71,11 @@ const TestResultPage = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    // 없는 유형으로 직접 접근하면 이미지 로드가 실패하므로 홈으로 돌려보낸다
+    if (!isValidResultType(resultType)) {
+        return <Navigate to="/" replace />;
+    }
 
     return (
         <PageWrapper>
