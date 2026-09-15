@@ -8,7 +8,7 @@ import RightIcon from '../../assets/icons/rightIcon.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import cursorIcon from '/cursorIcon2.svg';
-import { isMobile } from '../test-content/TestContentPage';
+import { isMobile } from '../../model/isMobile';
 
 const HomePage = () => {
     const navigate = useNavigate();

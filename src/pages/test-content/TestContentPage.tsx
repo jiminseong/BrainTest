@@ -14,13 +14,8 @@ import ResultLoading from './ui/ResultLoading';
 import calculateResultType from './model/calculateResultType';
 import { useReactToPrint } from 'react-to-print';
 import AlertModal from './ui/AlertModal';
-import html2canvas from 'html2canvas';
 import MobileBr from '../../component/box/MobileBr';
-
-// 모바일 여부를 감지하는 함수
-export const isMobile = () => {
-    return /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
-};
+import { isMobile } from '../../model/isMobile';
 
 const TestContentPage = () => {
     const [currentProgress, setCurrentProgress] = useState(0); // 퍼센티지
@@ -41,8 +36,9 @@ const TestContentPage = () => {
     const componentRef = useRef(null);
     const imageRef = useRef(null);
 
-    const downloadImage = (resultType: number) => {
+    const downloadImage = async (resultType: number) => {
         if (imageRef.current) {
+            const { default: html2canvas } = await import('html2canvas');
             html2canvas(imageRef.current, { backgroundColor: null }).then((canvas) => {
                 const link = document.createElement('a');
                 const urlName = name === '???' ? 'OOO' : name;
@@ -161,7 +157,7 @@ const TestContentPage = () => {
     };
 
     const handleMobileResult = (resultType: number): Promise<void> => {
-        return import(`../../assets/images/typeResultPng/type_${resultType}_bill.png`)
+        return import(`../../assets/images/typeResultPng/type_${resultType}_bill.webp`)
             .then((module) => {
                 setResultPng(module.default);
             })

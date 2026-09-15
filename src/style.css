@@ -37,30 +37,7 @@ body::-webkit-scrollbar {
 
 @font-face {
     font-family: 'SUIT';
-
-    font-weight: 100;
-
-    src: url('./assets/font/SUIT-Thin.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'SUIT';
-
-    font-weight: 200;
-
-    src: url('./assets/font/SUIT-ExtraLight.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'SUIT';
-
-    font-weight: 300;
-
-    src: url('./assets/font/SUIT-Light.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'SUIT';
+    font-display: swap;
 
     font-weight: 400;
 
@@ -69,6 +46,7 @@ body::-webkit-scrollbar {
 
 @font-face {
     font-family: 'SUIT';
+    font-display: swap;
 
     font-weight: 500;
 
@@ -77,6 +55,7 @@ body::-webkit-scrollbar {
 
 @font-face {
     font-family: 'SUIT';
+    font-display: swap;
 
     font-weight: 600;
 
@@ -85,6 +64,7 @@ body::-webkit-scrollbar {
 
 @font-face {
     font-family: 'SUIT';
+    font-display: swap;
 
     font-weight: 700;
 
@@ -93,6 +73,7 @@ body::-webkit-scrollbar {
 
 @font-face {
     font-family: 'SUIT';
+    font-display: swap;
 
     font-weight: 800;
 
@@ -101,6 +82,7 @@ body::-webkit-scrollbar {
 
 @font-face {
     font-family: 'SUIT';
+    font-display: swap;
 
     font-weight: 900;
 

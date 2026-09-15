@@ -3,7 +3,6 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { isValidResultType } from '../../model/resultType';
 import styled from 'styled-components';
 import { Button } from '../../component/button/Button';
-import html2canvas from 'html2canvas';
 import ResultLoading from '../test-content/ui/ResultLoading';
 
 const SavePage = () => {
@@ -14,8 +13,9 @@ const SavePage = () => {
     const imageRef = useRef(null);
     const navigate = useNavigate();
 
-    const downloadImage = () => {
+    const downloadImage = async () => {
         if (imageRef.current) {
+            const { default: html2canvas } = await import('html2canvas');
             html2canvas(imageRef.current, { backgroundColor: null }).then((canvas) => {
                 const link = document.createElement('a');
                 const urlName = name === '???' ? 'OOO' : name;
@@ -29,7 +29,7 @@ const SavePage = () => {
     useEffect(() => {
         const loadImage = async () => {
             try {
-                const module = await import(`../../assets/images/typeResultPng/type_${resultType}_bill.png`);
+                const module = await import(`../../assets/images/typeResultPng/type_${resultType}_bill.webp`);
                 setResultPng(module.default);
             } catch (err) {
                 console.error('PNG 로드 에러:', err);

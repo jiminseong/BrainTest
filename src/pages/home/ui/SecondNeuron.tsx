@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from 'framer-motion';
-import secondNeuronUrl from '../../../assets/images/secondNeuron.png';
+import secondNeuronUrl from '../../../assets/images/secondNeuron.webp';
 import styled from 'styled-components';
 import GreenContainer from './GreenContainer';
 import { useEffect, useState } from 'react';

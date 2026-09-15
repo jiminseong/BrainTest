@@ -10,7 +10,7 @@ import GraphicContainer from './ui/GraphicContainer';
 import MiddleNavigationBar from './ui/MiddleNavigationBar';
 import { Navigate, useParams } from 'react-router-dom';
 import { isValidResultType } from '../../model/resultType';
-import { isMobile } from '../test-content/TestContentPage';
+import { isMobile } from '../../model/isMobile';
 
 const TestResultPage = () => {
     const { type, name = '' } = useParams();

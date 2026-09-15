@@ -1,10 +1,34 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const AnimationContainer = ({ type, count, category }: { type: number; count: number; category: string }) => {
     const [IconSvg, setIconSvg] = useState<React.FC | null>(null); // 타입 정의 추가
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const [shouldLoad, setShouldLoad] = useState(false);
+
+    // 그래픽 섹션은 화면 한참 아래에 있는데 SVG 13개(약 400KB)를 마운트 즉시 받고 있었다.
+    // 뷰포트에 가까워질 때 받도록 미룬다. IntersectionObserver가 없으면 바로 받는다.
+    useEffect(() => {
+        const el = wrapperRef.current;
+        if (!el || typeof IntersectionObserver === 'undefined') {
+            setShouldLoad(true);
+            return;
+        }
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    setShouldLoad(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '300px' },
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
+        if (!shouldLoad) return;
         import(`../../../assets/images/typeGraphic/type${type}_${category}_${count}.svg?react`)
             .then((module) => {
                 setIconSvg(() => module.default);
@@ -12,9 +36,11 @@ const AnimationContainer = ({ type, count, category }: { type: number; count: nu
             .catch((err) => {
                 console.error('SVG 로드 에러:', err);
             });
-    }, [type, category, count]);
+    }, [shouldLoad, type, category, count]);
 
-    return <StyledDiv>{IconSvg && <StyledIconSvg as={IconSvg} />}</StyledDiv>;
+    return (
+        <StyledDiv ref={wrapperRef}>{IconSvg && <StyledIconSvg as={IconSvg} />}</StyledDiv>
+    );
 };
 
 export default AnimationContainer;
