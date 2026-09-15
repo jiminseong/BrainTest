@@ -12,10 +12,16 @@ import PageLogo from './ui/PageLogo';
 import NavigationButton from '../../component/button/NavigationButton';
 import ResultLoading from './ui/ResultLoading';
 import calculateResultType from './model/calculateResultType';
+import questionTypeMapping from './model/questionMapping';
 import { useReactToPrint } from 'react-to-print';
 import AlertModal from './ui/AlertModal';
 import MobileBr from '../../component/box/MobileBr';
 import { isMobile } from '../../model/isMobile';
+
+// 화면에 띄우는 문항 수와, 실제로 점수에 반영되는 문항 수는 다르다.
+// questionMapping이 채점의 기준이다.
+const LAST_QUESTION_INDEX = questionsData.questions.length - 1;
+const SCORED_QUESTION_COUNT = questionTypeMapping.length;
 
 const TestContentPage = () => {
     const [currentProgress, setCurrentProgress] = useState(0); // 퍼센티지
@@ -109,14 +115,18 @@ const TestContentPage = () => {
     };
 
     const handleAnswer = (answer: number) => {
-        if (0 <= questionIndex && questionIndex <= 37) saveAnswer(questionIndex, answer); // 답변을 상태에 저장
+        // 채점 범위는 questionMapping에서 끌어온다. 매핑에 1~38번만 있어서 화면에
+        // 나오는 39번째 문항('욕구를 참기가 어렵다')의 답변은 점수에 반영되지 않는다.
+        // 의도인지 누락인지 확인이 필요한데, 채점하려면 questionMapping에
+        // { questionIndex: 39, ... } 한 줄만 추가하면 여기도 같이 따라온다.
+        if (0 <= questionIndex && questionIndex < SCORED_QUESTION_COUNT) saveAnswer(questionIndex, answer);
 
         if (questionIndex === 9 || questionIndex === 21) {
             setPage(questionIndex === 9 ? 2 : 3);
             handleLoading();
             setQuestionIndex((prevIndex) => prevIndex + 1);
             setCurrentProgress((prev) => prev + 2.5);
-        } else if (questionIndex === 38) {
+        } else if (questionIndex === LAST_QUESTION_INDEX) {
             setQuestionIndex((prevIndex) => prevIndex + 1);
             setCurrentProgress((prev) => prev + 2.5);
 
@@ -297,7 +307,7 @@ const TestContentPage = () => {
                         </LoadingWrapper>
                     )}
 
-                    {questionIndex === 39 && loading && (
+                    {questionIndex === LAST_QUESTION_INDEX + 1 && loading && (
                         <SubmitLoadingWrapper>
                             <ResultLoading />
                         </SubmitLoadingWrapper>
