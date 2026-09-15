@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useReactToPrint } from 'react-to-print';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { isValidResultType } from '../../model/resultType';
 import TypeLogo from './ui/TypeLogo';
 import TopNavigationBar from '../test-result/ui/TopNavigationBar';
 import UnderTriangleIcon from '../../assets/icons/triangleIcon.svg?react';
@@ -9,8 +10,7 @@ import CloseIcon from '../../assets/icons/closeIcon.svg?react';
 import QrCode from './ui/QrCode';
 import cursorIcon from '/cursorIcon2.svg';
 import MobileBr from '../../component/box/MobileBr';
-import { isMobile } from '../test-content/TestContentPage';
-import html2canvas from 'html2canvas';
+import { isMobile } from '../../model/isMobile';
 import RightIcon from '../../assets/icons/rightIcon.svg?react';
 
 const PrintPage = () => {
@@ -23,14 +23,15 @@ const PrintPage = () => {
     const imageRef = useRef(null);
     const { type, name = '' } = useParams();
     const resultType = Number(type);
-    const urlName = name === '???' ? '%3f%3f%3f' : name;
+    const urlName = encodeURIComponent(name);
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: '결과페이지',
     });
-    const downloadImage = () => {
+    const downloadImage = async () => {
         if (imageRef.current) {
+            const { default: html2canvas } = await import('html2canvas');
             html2canvas(imageRef.current, { backgroundColor: null }).then((canvas) => {
                 const link = document.createElement('a');
                 const urlName = name === '???' ? 'OOO' : name;
@@ -53,7 +54,7 @@ const PrintPage = () => {
     useEffect(() => {
         const loadImage = async () => {
             try {
-                const module1 = await import(`../../assets/images/typeResultPng/type_${resultType}_bill.png`);
+                const module1 = await import(`../../assets/images/typeResultPng/type_${resultType}_bill.webp`);
                 setResultPng(module1.default);
                 console.log('PNG 로드됨');
 
@@ -82,6 +83,11 @@ const PrintPage = () => {
             setWrapperVisible(false);
         }
     };
+
+    // 없는 유형으로 직접 접근하면 이미지 로드가 실패하므로 홈으로 돌려보낸다
+    if (!isValidResultType(resultType)) {
+        return <Navigate to="/" replace />;
+    }
 
     return (
         <PageWrapper>
