@@ -6,11 +6,11 @@ const TypeStructure = ({ type }: { type: number }) => {
 
     useEffect(() => {
         // 비동기 import로 이미지 로드
-        import(`../../../assets/images/typeStructure/type_${type}_word.png`)
+        import(`../../../assets/images/typeStructure/type_${type}_word.webp`)
             .then((module) => setStructureUrl(module.default))
             .catch(() => {
                 // 로드 실패 시 기본 이미지 사용
-                import('../../../assets/images/typeStructure/type_2_word.png').then((module) =>
+                import('../../../assets/images/typeStructure/type_2_word.webp').then((module) =>
                     setStructureUrl(module.default),
                 );
             });

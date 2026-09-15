@@ -8,10 +8,9 @@ import RightIcon from '../../assets/icons/rightIcon.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import cursorIcon from '/cursorIcon2.svg';
-import { isMobile } from '../test-content/TestContentPage';
+import { isMobile } from '../../model/isMobile';
 
 const HomePage = () => {
-    localStorage.setItem('currentPossibility', `${import.meta.env.VITE_DRAW_PROBABILITY * 100}% `);
     const navigate = useNavigate();
     const [buttonDisplay, setButtonDisplay] = useState(false);
     const [animationStopState, setAnimationStop] = useState(false);
