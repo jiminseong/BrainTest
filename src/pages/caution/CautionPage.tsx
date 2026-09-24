@@ -139,19 +139,20 @@ const Title = styled.div`
     font-weight: 700;
     margin-bottom: 2em;
     @media (max-width: 1023px) {
+        font-size: 1.6875em;
         margin-bottom: 1em;
     }
 `;
 
 const CautionText = styled.div`
     width: 100%;
-    font-size: 0.8125em;
+    font-size: 0.9375em;
     text-align: center;
     color: #111;
     font-weight: 500;
     line-height: 2em;
     @media (max-width: 768px) {
-        font-size: 0.8125em;
+        font-size: 0.9375em;
         line-height: 1.25em;
     }
 `;

@@ -30,9 +30,11 @@ export default TypeStructure;
 
 const ImageWrapper = styled.div`
     display: flex;
+    width: 100%;
     justify-content: center;
 `;
 
 const NeuronImage = styled.img`
     width: 50%;
+    height: auto;
 `;

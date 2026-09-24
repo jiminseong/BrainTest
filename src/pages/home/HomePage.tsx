@@ -116,8 +116,8 @@ const HomePageWrapper = styled.div`
 const ContentText = styled.p`
     background-color: #070707;
     width: fit-content;
-    font-size: 1em;
-    line-height: 1em;
+    font-size: 1.125em;
+    line-height: 1.5em;
     color: #ffffff;
     margin: 0.5em 0;
     white-space: pre-line;

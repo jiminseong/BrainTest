@@ -34,7 +34,8 @@ const GraphicContainer = ({ type }: { type: number }) => {
                 <Column3>
                     <StyledBottomLogo />
                     <BottomText>
-                        ⓒ 2024 WHY ARE YOU NERVOUS :<MobileBr />
+                        Designed By Kim MinZi Developed By Ji MinSeong
+                        <MobileBr /> ⓒ 2024 WHY ARE YOU NERVOUS :<MobileBr />
                         Look Inside My Brain, All rights reserved.
                     </BottomText>
                 </Column3>
@@ -106,7 +107,13 @@ const Text = styled.div`
 `;
 
 const BottomText = styled.div`
+    width: 100%;
+    max-width: 36.5em;
     color: #070707;
     font-weight: 500;
+    font-size: 1em;
+    line-height: 1.4em;
     text-align: center;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
 `;
