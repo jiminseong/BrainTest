@@ -30,10 +30,12 @@ export default TypeNeuron;
 
 const ImageWrapper = styled.div`
     display: flex;
+    width: 100%;
     justify-content: center;
 `;
 
 const NeuronImage = styled.img`
     width: 60%;
-    max-height: 900px;
+    max-width: 900px;
+    height: auto;
 `;

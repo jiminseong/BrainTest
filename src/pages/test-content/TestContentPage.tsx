@@ -13,7 +13,6 @@ import NavigationButton from '../../component/button/NavigationButton';
 import ResultLoading from './ui/ResultLoading';
 import calculateResultType from './model/calculateResultType';
 import questionTypeMapping from './model/questionMapping';
-import { useReactToPrint } from 'react-to-print';
 import AlertModal from './ui/AlertModal';
 import MobileBr from '../../component/box/MobileBr';
 import { isMobile } from '../../model/isMobile';
@@ -37,9 +36,7 @@ const TestContentPage = () => {
 
     const navigate = useNavigate();
 
-    const [ResultSvg, setResultSvg] = useState<React.FC | null>(null);
     const [ResultPng, setResultPng] = useState<string | null>(null);
-    const componentRef = useRef(null);
     const imageRef = useRef(null);
 
     const downloadImage = async (resultType: number) => {
@@ -54,11 +51,6 @@ const TestContentPage = () => {
             });
         }
     };
-
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-        documentTitle: '결과영수증',
-    });
 
     const { setName, setResult, saveAnswer, answers, name } = useSurveyStore();
 
@@ -136,10 +128,8 @@ const TestContentPage = () => {
             setResult(resultType);
 
             if (!isMobile()) {
-                handleResult(resultType).then(() => {
-                    handleLoading().then(() => {
-                        loadResultSvg();
-                    });
+                handleLoading().then(() => {
+                    loadResultSvg();
                 });
             } else {
                 handleMobileResult(resultType).then(() => {
@@ -153,17 +143,6 @@ const TestContentPage = () => {
             setQuestionIndex((prevIndex) => prevIndex + 1);
             setCurrentProgress((prev) => prev + 2.5);
         }
-    };
-
-    const handleResult = (resultType: number): Promise<void> => {
-        return import(`../../assets/images/typeResult/type_${resultType}_bill.svg?react`)
-            .then((module) => {
-                setResultSvg(() => module.default);
-            })
-            .catch((err) => {
-                console.error('SVG 로드 에러:', err);
-                setLoading(false); // 에러가 발생해도 로딩 해제
-            });
     };
 
     const handleMobileResult = (resultType: number): Promise<void> => {
@@ -195,7 +174,6 @@ const TestContentPage = () => {
             const resultType = calculateResultType();
 
             setLoading(false);
-            handlePrint();
 
             navigate(`/test/result/${resultType}/${encodeURIComponent(name)}`, { replace: true });
             setTimeout(() => {
@@ -262,7 +240,9 @@ const TestContentPage = () => {
                         </LoadingWrapper>
                     )}
 
-                    {loading === false && page >= 1 && (
+                    {/* 마지막 문항 이후에는 loading 값과 무관하게 문항 화면을 그리지 않는다.
+                        그렇지 않으면 로딩 전후로 질문 없는 빈 문항 화면이 깜빡인다. */}
+                    {loading === false && page >= 1 && questionIndex <= LAST_QUESTION_INDEX && (
                         <ContentColumn>
                             {currentProgress >= 2.5 && !loading && (
                                 <>
@@ -307,18 +287,13 @@ const TestContentPage = () => {
                         </LoadingWrapper>
                     )}
 
-                    {questionIndex === LAST_QUESTION_INDEX + 1 && loading && (
+                    {questionIndex > LAST_QUESTION_INDEX && (
                         <SubmitLoadingWrapper>
                             <ResultLoading />
                         </SubmitLoadingWrapper>
                     )}
                 </Column>
             </PageWrapper>
-
-            <PrintContainer ref={componentRef}>
-                <Name>{name}님의 뇌유형은</Name>
-                {ResultSvg && <StyledResultSvg as={ResultSvg} />}
-            </PrintContainer>
 
             <SaveContainer ref={imageRef}>
                 <MobileName>{name}님의 뇌유형은</MobileName>
@@ -457,46 +432,6 @@ const TextContentButton = styled(Button)`
     }
 `;
 
-const PrintContainer = styled.div`
-    position: relative;
-    display: none;
-
-    background: #fff;
-    color: #070707;
-    width: 523px;
-    height: fit-content;
-    overflow-y: auto;
-    box-sizing: border-box;
-
-    @media print {
-        display: flex;
-        width: 79mm;
-        height: 297mm;
-        box-shadow: none;
-        animation: none;
-
-        @page {
-            size: 79mm 297mm;
-        }
-    }
-`;
-
-const Name = styled.div`
-    display: none;
-    position: absolute;
-    font-size: 1.625rem;
-    font-weight: 800;
-    left: 50%;
-    top: 3em;
-    color: #231815;
-    transform: translate(-50%, -50%);
-    @media print {
-        display: flex;
-        top: 3.5em;
-        font-size: 0.8rem;
-    }
-`;
-
 const MobileName = styled.div`
     position: absolute;
     font-size: 1rem;
@@ -506,11 +441,6 @@ const MobileName = styled.div`
     color: #231815;
     transform: translate(-50%, -50%);
 `;
-const StyledResultSvg = styled.div`
-    width: 100%;
-    height: auto;
-`;
-
 const SaveContainer = styled.div`
     position: relative;
     width: 50%;

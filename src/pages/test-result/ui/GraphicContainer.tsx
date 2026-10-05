@@ -34,8 +34,21 @@ const GraphicContainer = ({ type }: { type: number }) => {
                 <Column3>
                     <StyledBottomLogo />
                     <BottomText>
-                        ⓒ 2024 WHY ARE YOU NERVOUS :<MobileBr />
-                        Look Inside My Brain, All rights reserved.
+                        <CreditRow>
+                            <span>Designed By Kim MinZi</span>
+                            <span>Developed By Ji MinSeong</span>
+                        </CreditRow>
+                        <CopyrightLine>
+                            ⓒ 2024 WHY ARE YOU NERVOUS :<MobileBr />
+                            Look Inside My Brain, All rights reserved.
+                        </CopyrightLine>
+                        <Notice>
+                            해당 테스트는 그래픽 시스템을 사용하여 <MobileBr />
+                            가상의 뉴런을 생성하는 뇌 유형 테스트입니다.
+                            <br />
+                            더 정확한 뇌 유형을 확인하고 싶은 분은 <MobileBr />
+                            ‘Brain MD BY DANIEL AMEN, MD’ TEST를 이용하시길 바랍니다.
+                        </Notice>
                     </BottomText>
                 </Column3>
             </Wrapper>
@@ -105,8 +118,43 @@ const Text = styled.div`
     font-weight: 500;
 `;
 
+/* 피그마 스펙(2026-10-05): SUIT 500, 16px, 줄 간격 22px, 자간 -0.02em, 가로 584px.
+   첫 줄 → (빈 줄) → 저작권 → (빈 줄 2) → 안내문 14px 두 줄 */
 const BottomText = styled.div`
+    width: 100%;
+    max-width: 36.5em;
     color: #070707;
     font-weight: 500;
+    font-size: 1em;
+    line-height: 1.375em;
     text-align: center;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+`;
+
+const CreditRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-bottom: 1.375em;
+    @media (max-width: 1023px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 0.6875em;
+    }
+`;
+
+const CopyrightLine = styled.div`
+    margin-bottom: 2.75em;
+    @media (max-width: 1023px) {
+        margin-bottom: 1.375em;
+    }
+`;
+
+const Notice = styled.div`
+    font-size: 0.875em;
+    line-height: 1.5714em;
+    text-transform: none;
+    word-break: keep-all;
 `;
