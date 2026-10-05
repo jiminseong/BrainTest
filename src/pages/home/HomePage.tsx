@@ -116,11 +116,14 @@ const HomePageWrapper = styled.div`
 const ContentText = styled.p`
     background-color: #070707;
     width: fit-content;
-    font-size: 1.125em;
+    font-size: 1.25em;
     line-height: 1.5em;
     color: #ffffff;
     margin: 0.5em 0;
     white-space: pre-line;
+    @media (max-width: 1023px) {
+        font-size: 1.125em;
+    }
 `;
 
 const StyledLogo = styled(Logo)`

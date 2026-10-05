@@ -105,32 +105,37 @@ const CautionPage = () => {
 export default CautionPage;
 
 const Column = styled.div`
-    height: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    @media (max-width: 1023px) {
-        height: 90%;
-    }
 `;
 
+// 본문이 20px로 커진 뒤 1280x720 같은 노트북 뷰포트에서 글이 버튼 밑으로 깔렸다.
+// 높이를 고정(60%)하지 않고 최소 높이만 두어, 글이 길면 버튼이 아래로 밀리고 페이지가 스크롤된다.
 const ColumnWrapper = styled(Column)`
-    height: 60%;
+    min-height: 60vh;
     justify-content: space-between;
+    gap: 3em;
     @media (max-width: 1023px) {
         width: 80%;
-        height: 80%;
+        min-height: 80vh;
+        gap: 2em;
     }
 `;
 
 const PageWrapper = styled.div`
     width: 100%;
-    height: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 5em 0 3em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: #ffffff;
+    @media (max-width: 1023px) {
+        padding: 4em 0 2em;
+    }
 `;
 
 const Title = styled.div`
@@ -146,13 +151,15 @@ const Title = styled.div`
 
 const CautionText = styled.div`
     width: 100%;
-    font-size: 0.9375em;
+    font-size: 1.25em;
     text-align: center;
     color: #111;
     font-weight: 500;
     line-height: 2em;
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
         font-size: 0.9375em;
+    }
+    @media (max-width: 768px) {
         line-height: 1.25em;
     }
 `;
