@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+# 결과·저장·프린트 URL에는 사용자가 입력한 이름이 들어간다.
+# 공유 링크로 직접 여는 용도이므로 검색 색인에서는 제외한다.
+Disallow: /test/result/
+Disallow: /save/
+Disallow: /print/
+
+Sitemap: https://braintest-nine.vercel.app/sitemap.xml

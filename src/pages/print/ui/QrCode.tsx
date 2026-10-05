@@ -7,10 +7,11 @@ interface QrCodeProps {
     name: string;
 }
 
-const QrCode: React.FC<QrCodeProps> = ({ type, name }) => {
-    if (name === '???') name = '%3F%3F%3F';
+// VITE_URL이 없으면 현재 접속한 주소를 그대로 사용한다 (프리뷰·프로덕션 모두 동작)
+const getBaseUrl = () => import.meta.env.VITE_URL || window.location.origin;
 
-    const url = `${import.meta.env.VITE_URL}/save/${type}/${name}`;
+const QrCode: React.FC<QrCodeProps> = ({ type, name }) => {
+    const url = `${getBaseUrl()}/save/${type}/${encodeURIComponent(name)}`;
 
     return (
         <QrCodeWrapper>

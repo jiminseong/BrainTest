@@ -6,11 +6,11 @@ const TypeNeuron = ({ type }: { type: number }) => {
 
     useEffect(() => {
         // 비동기 import로 이미지 로드
-        import(`../../../assets/images/typeNeuron/type${type}_neuron.png`)
+        import(`../../../assets/images/typeNeuron/type${type}_neuron.webp`)
             .then((module) => setNeuronUrl(module.default))
             .catch(() => {
                 // 로드 실패 시 기본 이미지 사용
-                import('../../../assets/images/typeNeuron/type1_neuron.png').then((module) =>
+                import('../../../assets/images/typeNeuron/type1_neuron.webp').then((module) =>
                     setNeuronUrl(module.default),
                 );
             });
@@ -30,10 +30,12 @@ export default TypeNeuron;
 
 const ImageWrapper = styled.div`
     display: flex;
+    width: 100%;
     justify-content: center;
 `;
 
 const NeuronImage = styled.img`
     width: 60%;
-    max-height: 900px;
+    max-width: 900px;
+    height: auto;
 `;

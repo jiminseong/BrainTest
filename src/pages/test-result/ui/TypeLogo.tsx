@@ -10,11 +10,11 @@ const TypeLogo = ({ type }: { type: number }) => {
 
     useEffect(() => {
         // 비동기 import로 이미지 로드
-        import(`../../../assets/images/typeLogo/type_${type}_icon.png`)
+        import(`../../../assets/images/typeLogo/type_${type}_icon.webp`)
             .then((module) => setLogoUrl(module.default))
             .catch(() => {
                 // 로드 실패 시 기본 이미지 사용
-                import('../../../assets/images/typeLogo/type_1_icon.png').then((module) => setLogoUrl(module.default));
+                import('../../../assets/images/typeLogo/type_1_icon.webp').then((module) => setLogoUrl(module.default));
             });
     }, [type]);
 

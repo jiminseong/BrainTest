@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from 'framer-motion';
-import firstNeuronUrl from '../../../assets/images/firistNeuron.png';
+import firstNeuronUrl from '../../../assets/images/firistNeuron.webp';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 

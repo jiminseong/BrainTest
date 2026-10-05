@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import firstUrl from '../../../assets/images/firstLogo.png';
-import secondUrl from '../../../assets/images/secondLogo.png';
-import thirdUrl from '../../../assets/images/thirdLogo.png';
+import firstUrl from '../../../assets/images/firstLogo.webp';
+import secondUrl from '../../../assets/images/secondLogo.webp';
+import thirdUrl from '../../../assets/images/thirdLogo.webp';
 
 interface PageLogoProps {
     page: number;
