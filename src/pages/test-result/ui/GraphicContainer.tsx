@@ -132,12 +132,16 @@ const BottomText = styled.div`
     text-transform: capitalize;
 `;
 
+/* 2026-10-06 피드백: Designed/Developed를 저작권 줄 양끝(약 534px)에 맞춰 안쪽으로 */
 const CreditRow = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 1em;
-    margin-bottom: 1.375em;
+    width: 33.5em;
+    max-width: 100%;
+    margin: 0 auto 1.375em;
     @media (max-width: 1023px) {
+        width: 100%;
         flex-direction: column;
         align-items: center;
         gap: 0;
@@ -157,4 +161,9 @@ const Notice = styled.div`
     line-height: 1.5714em;
     text-transform: none;
     word-break: keep-all;
+    /* 2026-10-06 피드백: 모바일 안내문 5pt 축소 (14px → 9px).
+       em(0.5625em)으로 주면 Chrome의 '최소 논리 글꼴 크기' 때문에 10px로 올라가서 px로 고정 */
+    @media (max-width: 1023px) {
+        font-size: 9px;
+    }
 `;
