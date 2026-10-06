@@ -6,4 +6,4 @@ Disallow: /test/result/
 Disallow: /save/
 Disallow: /print/
 
-Sitemap: https://braintest-nine.vercel.app/sitemap.xml
+Sitemap: https://whyrunervous.kr/sitemap.xml

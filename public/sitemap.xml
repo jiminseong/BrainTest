@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://braintest-nine.vercel.app/</loc>
+        <loc>https://whyrunervous.kr/</loc>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://braintest-nine.vercel.app/caution</loc>
+        <loc>https://whyrunervous.kr/caution</loc>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://braintest-nine.vercel.app/test/content</loc>
+        <loc>https://whyrunervous.kr/test/content</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
