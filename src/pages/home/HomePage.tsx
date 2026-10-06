@@ -124,6 +124,10 @@ const ContentText = styled.p`
     @media (max-width: 1023px) {
         font-size: 1.125em;
     }
+    /* 노트북(1280x720 등) 높이에서는 문단 간격을 줄여 버튼이 화면 안에 들어오게 */
+    @media (min-width: 1024px) and (max-height: 760px) {
+        margin: 0.2em 0;
+    }
 `;
 
 const StyledLogo = styled(Logo)`
@@ -147,7 +151,7 @@ const Title = styled.span`
 
 const ButtonWrapper = styled.button`
     cursor: url(${cursorIcon}) 37 37, pointer;
-    margin-top: 5%;
+    margin-top: 2em;
     background: #070707;
     width: fit-content;
     border: none;
@@ -177,12 +181,15 @@ const FirstGreenContainer = styled.div`
     color: #ffffff;
     min-width: 60%;
     min-height: 45%;
-    top: 35%;
+    /* 박스 높이(제목+본문 9줄+버튼)는 약 44em. 화면이 낮으면 35%보다 위로 올려
+       시작 버튼까지 보이게 한다 (2026-10-06 피드백). 아무리 낮아도 TYPES 링크(top 5%) 아래. */
+    top: clamp(calc(5% + 2.5em), calc(95% - 44em), 35%);
     left: 5%;
     box-shadow: 0 0 0 3px #7aff77 inset, 0px 0px 8.5px 1px #77ceff;
     @media (max-width: 1023px) {
         right: 5%;
-        top: 25%;
+        /* 모바일 박스 높이 약 34em (본문 7줄). 최소 6.5em은 우상단 로고 아래 */
+        top: clamp(6.5em, calc(95% - 34em), 25%);
     }
 `;
 
