@@ -1,6 +1,7 @@
-import { Suspense, lazy } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { trackPageView } from './model/analytics';
 
 /**
  * 라우트별 코드 스플리팅.
@@ -17,6 +18,12 @@ const PrintPage = lazy(() => import('./pages/print/PrintPage'));
 const SavePage = lazy(() => import('./pages/save/SavePage'));
 
 function App() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        trackPageView(pathname);
+    }, [pathname]);
+
     return (
         <Suspense fallback={<RouteFallback />}>
             <Routes>
