@@ -12,6 +12,7 @@ import cursorIcon from '/cursorIcon2.svg';
 import MobileBr from '../../component/box/MobileBr';
 import { isMobile } from '../../model/isMobile';
 import RightIcon from '../../assets/icons/rightIcon.svg?react';
+import { trackEvent } from '../../model/analytics';
 
 const PrintPage = () => {
     const navigate = useNavigate();
@@ -45,8 +46,10 @@ const PrintPage = () => {
         if (isWrapperVisible && isPrintContainerVisible) {
             if (isMobile()) {
                 downloadImage();
+                trackEvent({ name: 'result_save', params: { result_type: resultType, method: 'image' } });
             } else {
                 handlePrint();
+                trackEvent({ name: 'result_save', params: { result_type: resultType, method: 'print' } });
             }
         }
     }, [isWrapperVisible, isPrintContainerVisible]);
