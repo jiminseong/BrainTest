@@ -16,6 +16,7 @@ import questionTypeMapping from './model/questionMapping';
 import AlertModal from './ui/AlertModal';
 import MobileBr from '../../component/box/MobileBr';
 import { isMobile } from '../../model/isMobile';
+import { trackEvent } from '../../model/analytics';
 
 // 화면에 띄우는 문항 수와, 실제로 점수에 반영되는 문항 수는 다르다.
 // questionMapping이 채점의 기준이다.
@@ -84,6 +85,7 @@ const TestContentPage = () => {
         } else {
             setName(currentName);
             setNameCheck(true);
+            trackEvent({ name: 'test_start' });
             handleLoading().then(() => {
                 setPage(1);
             });
@@ -126,6 +128,7 @@ const TestContentPage = () => {
 
             const resultType = calculateResultType();
             setResult(resultType);
+            trackEvent({ name: 'test_complete', params: { result_type: resultType } });
 
             if (!isMobile()) {
                 handleLoading().then(() => {

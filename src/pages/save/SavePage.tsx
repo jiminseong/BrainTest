@@ -4,6 +4,7 @@ import { isValidResultType } from '../../model/resultType';
 import styled from 'styled-components';
 import { Button } from '../../component/button/Button';
 import ResultLoading from '../test-content/ui/ResultLoading';
+import { trackEvent } from '../../model/analytics';
 
 const SavePage = () => {
     const { type, name = '' } = useParams();
@@ -15,6 +16,7 @@ const SavePage = () => {
 
     const downloadImage = async () => {
         if (imageRef.current) {
+            trackEvent({ name: 'result_save', params: { result_type: resultType, method: 'image' } });
             const { default: html2canvas } = await import('html2canvas');
             html2canvas(imageRef.current, { backgroundColor: null }).then((canvas) => {
                 const link = document.createElement('a');
