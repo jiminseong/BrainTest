@@ -18,7 +18,8 @@
 | 시작 화면 문구 | `src/pages/home/HomePage.tsx` |
 | 주의사항 화면 문구 | `src/pages/caution/CautionPage.tsx` |
 | 결과 분석 중 문구 | `src/pages/test-content/ui/ResultLoading.tsx` |
-| 결과 페이지 문구 | `src/pages/test-result/ui/TypeContentText.tsx`, `TypeTitle.tsx` |
+| 결과 페이지 문구 (유형 설명) | `src/pages/test-result/model/result.json` |
+| 결과 페이지 문구 (유형 제목) | `src/pages/test-result/model/title.json` |
 | 결과 유형 뉴런 그림 (16종) | `src/assets/images/typeNeuron/type{N}_neuron.webp` |
 | 결과 유형 구조 그림 (16종) | `src/assets/images/typeStructure/type_{N}_word.webp` |
 | 결과 유형 로고 (16종) | `src/assets/images/typeLogo/type_{N}_icon.webp` |
