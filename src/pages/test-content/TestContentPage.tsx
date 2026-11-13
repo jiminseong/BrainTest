@@ -445,16 +445,15 @@ const MobileName = styled.div`
     transform: translate(-50%, -50%);
 `;
 const SaveContainer = styled.div`
-    position: relative;
+    position: fixed;
+    left: -9999px;
+    top: -9999px;
     width: 50%;
-
-    top: 5%;
-    box-shadow: 0px 4px 12.5px 9px rgba(0, 0, 0, 0.16);
+    opacity: 0;
+    pointer-events: none;
 
     @media (max-width: 1023px) {
         width: 90%;
-
-        top: 5%;
     }
 `;
 
